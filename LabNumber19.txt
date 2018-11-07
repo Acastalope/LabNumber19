@@ -1,0 +1,59 @@
+Lab Number 19
+
+1. Select all the records from the "Customers" table. 
+SELECT * FROM customers;
+
+2. Get distinct countries from the Customers table.
+SELECT DISTINCT Country FROM Customers;
+
+3. Get all the records from the table Customers where the Customer's ID starts with "BL".
+SELECT * FROM Customers 
+WHERE CustomerID LIKE 'BL%';
+
+4. Get the first 100 records of the orders table.
+SELECT * FROM orders LIMIT 100;
+
+5.Get all customers that live in the postal codes 1010, 3012, 12209, and 05023.
+SELECT postalcode FROM Customers;
+
+6.Get all orders where the ShipRegion is not equal to NULL.
+SELECT ShipRegion FROM orders WHERE ShipRegion IS NOT NULL;
+
+7.Get all customers ordered by the country, then by the city.
+SELECT * FROM Customers
+ ORDER BY Country, City
+;
+
+8. Add a new customer to the customers table. You can use whatever values you choose.
+INSERT INTO customers (CustomerID, CompanyName, ContactName, ContactTitle, Address, City, PostalCode, Country, Phone)
+VALUES ('ANGEC', 'Coffee Tasters', 'Angela Castaneda', 'Owner', 'Franklin Road 3950', 'Bloomfield', '49116', 'USA', '248-625-7769');
+
+9. Update all ShipRegion to the value 'EuroZone' in the Orders table, where the ShipCountry is equal to France. 
+UPDATE orders SET ShipRegion='EuroZone' WHERE ShipCountry='France';
+
+10. Delete all orders from 'order details' that have quantity of 1.
+DELETE FROM `northwind`.`order details` WHERE quantity=1;
+
+11. Calculate the average, max, and min of the quantity at the 'order details' table.
+SELECT avg(quantity), max(quantity), min(quantity) FROM `northwind`.`order details`;
+
+12. Calculate the average, max, and min of the quantity at the 'order details' table, grouped by the orderid.
+SELECT avg(quantity) as Average_Quantity, max(quantity) as Max_Quantity, min(quantity) as Min_Quantity FROM `northwind`.`order details` 
+group by orderid;
+
+13. Find the CustomerID that placed order 10290 (orders table).
+SELECT CustomerID FROM orders WHERE OrderID = 10290;
+
+14. Do an inner join, left join, right join on orders and customers tables.
+Select orders.customerID, orders.orderDate from customers inner join orders on orders.customerID = customers.customerID;
+
+SELECT * FROM customers LEFT JOIN orders ON customers.customerid = orders.customerid;
+
+SELECT * FROM customers Right JOIN orders ON customers.customerid = orders.customerid;
+
+15. Get employees' firstname for all employees who report to no one.
+SELECT FirstName FROM employees WHERE reportsto is NULL;
+
+16. Get employees' firstname for all employees who report to Andrew.
+Select firstName from  employees where reportsTo = (select employeeid from employees where firstname = "Andrew");
+
